@@ -4,5 +4,5 @@ from .import views
 urlpatterns= [
     path('', views.home, name='home'),
     path('appetizer', views.appetizer, name='appetizer'),
-   
+    path('management', views.management, name='management'),
 ]

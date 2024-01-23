@@ -12,3 +12,5 @@ def appetizer(request):
     appetizers = Item.objects.filter(category=appetizer_category)
     return render(request, 'appetizer.html', {'appetizers': appetizers})
 
+def management(request):
+    return render(request,'management.html')
