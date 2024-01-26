@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # To create a Django model for your restaurant website where owners can update an appetizer page, main dish page, and dessert page, you can define three models—one for each section. Below is an example of how your models.py file could be structured:
 
@@ -70,3 +70,14 @@ class Reservation(models.Model):
 
         def __str__(self):
             return f"{self.customer_name} - {self.reservation_date}"
+
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=100, default='N/A')
+    email = models.EmailField(default='example@example.com') 
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=1)
+    comments= models.TextField(blank=True, null=True)
+    # comments = models.TextField()
+
+    def __str__(self):
+        return f"{self.name}'s Feedback"

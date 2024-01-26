@@ -232,7 +232,9 @@
             </a>
         {% endif %}
         <!-- <button id="management-button">Management</button> -->
-        <a href="#clients">FEEDBACK</a>
+        <a href="{% url 'feedback' %}">
+            <button>Feedback</button>
+        </a>
         </ul>
     </nav>
 

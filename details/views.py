@@ -15,6 +15,18 @@ def appetizer(request):
     appetizers = Item.objects.filter(category=appetizer_category)
     return render(request, 'appetizer.html', {'appetizers': appetizers})
 
+def main(request):
+    main_category = Category.objects.get(name='Main')
+    mainDish = Item.objects.filter(category=main_category)
+
+    return render(request,'mainCourse.html',{'mainDish':mainDish})
+
+def dessert(request):
+    dessert_category = Category.objects.get(name='Dessert')
+    dessertDish = Item.objects.filter(category=dessert_category)
+
+    return render(request,'dessert.html',{'dessertDish':dessertDish})
+
 def management(request):
     return render(request,'management.html')
 
@@ -86,3 +98,28 @@ def reservation_form(request):
 
 def reservation_success(request):
     return render(request,'reservation_success.html')
+
+
+def policies(request):
+    return render(request,'policies.html')
+
+
+def feedback(request):
+    if request.method == 'POST':
+        # Process form data when the form is submitted
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        rating = request.POST.get('rating')
+        comments = request.POST.get('comments')
+
+        feedback_info = Feedback( name=name, email=email, rating=rating, comments=comments)
+        feedback_info.save()
+
+        # Perform your custom form validation and processing here
+       
+
+        # Process the feedback data (e.g., save to a database)
+        # Add your logic here
+        # return redirect('success_page')  # Redirect to a success page
+
+    return render(request, 'feedback.html', {'error': None})

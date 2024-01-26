@@ -1,0 +1,89 @@
+{% extends 'main.html'%}
+{% load static %}
+{% block content%}
+
+<section class="menu-section">
+    <h1>MAINCOURSE</h1>
+    <button class="location-button">Find Location</button>
+</section>
+
+ <!-- Search bar for name -->
+ <label for="nameSearch">Search by Name:</label>
+ <input type="text" id="nameSearch" placeholder="Search by name...">
+
+ <!-- Search bar for description -->
+ <label for="descSearch">Search by Description:</label>
+ <input type="text" id="descSearch" placeholder="Search by description...">
+
+
+<section class="advertisement-section">
+    <!-- Add your advertisement content here -->
+    <p>This is your advertisement area.</p>
+</section>
+
+<ul id="appetizerList">
+    {% for main in mainDish %}
+        <li class="appetizer" data-name="{{ main.name }}" data-description="{{ main.description }}">
+            <h3 >{{ main.name }}</h3>
+            <!-- <p >{{ appetizer.description }}</p> -->
+            <p>Price: ${{ main.price }}</p>
+            {% if dessert.image %}
+                <img src="{{ main.image.url }}" alt="{{ main.name }}">
+            {% endif %}
+            <button class="show-description-btn">Show Description</button>
+        <p class="description" style="display: none;">{{ main.description}}</p>
+        
+        </li>
+    {% endfor %}
+</ul>
+
+
+<script>
+      // Get the input and list elements
+      var nameSearchInput = document.getElementById('nameSearch');
+      var descSearchInput = document.getElementById('descSearch');
+      var appetizerList = document.getElementById('appetizerList');
+
+      // Add event listeners for input changes
+      nameSearchInput.addEventListener('input', handleSearch);
+      descSearchInput.addEventListener('input', handleSearch);
+
+      function handleSearch() {
+          var nameFilter = nameSearchInput.value.toUpperCase();
+          var descFilter = descSearchInput.value.toUpperCase();
+
+          // Loop through the list items and hide/show based on the filters
+          var appetizers = document.getElementsByClassName('appetizer');
+          for (var i = 0; i < appetizers.length; i++) {
+              var item = appetizers[i];
+              var itemName = item.getAttribute('data-name').toUpperCase();
+              var itemDesc = item.getAttribute('data-description').toUpperCase();
+
+              var nameMatch = itemName.indexOf(nameFilter) > -1;
+              var descMatch = itemDesc.indexOf(descFilter) > -1;
+
+              // Show the item only if both filters match or if there is no filter
+              if (nameMatch && descMatch) {
+                  item.style.display = '';
+              } else {
+                  item.style.display = 'none';
+              }
+          }
+      }
+      //this is for description button
+      document.addEventListener('DOMContentLoaded', function () {
+        const buttons = document.querySelectorAll('.show-description-btn');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                const description = this.nextElementSibling;
+                description.style.display = (description.style.display === 'none' || description.style.display === '') ? 'block' : 'none';
+            });
+        });
+    });
+
+     
+</script>
+
+
+{% endblock content %}

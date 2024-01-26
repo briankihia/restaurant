@@ -24,6 +24,15 @@
 
             <label for="special_request">Special Requests:</label>
             <textarea name="special_request" rows="4" cols="50"></textarea>
+
+            
+            <a href="{% url 'appetizer' %}">
+                <div >
+                    <h5>Policies</h5>
+                </div>
+            </a>
+            <h6>Have read policy click box</h6>
+            <input type="checkbox" id="agreeCheckbox" name="agreement" required>
             
             <button type="submit">Submit Reservation</button>
         </form>

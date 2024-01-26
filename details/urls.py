@@ -11,4 +11,8 @@ urlpatterns= [
     path('timetable/',views.timetable, name='timetable'),
     path('reservation_form/', views.reservation_form, name='reservation_form'),
     path('reservation_success/', views.reservation_success,  name='reservation_success'),
+    path('policies/', views.policies,name='policies'),
+    path('feedback/', views.feedback, name='feedback'),
+    path('main/', views.main, name='main'),
+    path('dessert/', views.dessert, name='dessert'),
 ]
