@@ -58,14 +58,14 @@ class DailyDuty(models.Model):
 
 
 
-# class Reservation(models.Model):
-#         customer_name = models.CharField(max_length=100)
+class Reservation(models.Model):
+        customer_name = models.CharField(max_length=100)
 #     #         # email = models.CharField(max_length=200, null=True, unique=True)  # Uncomment this line
 #     #         # phone_number = models.CharField(max_length=15, blank=True, null=True, default='N/A')
 #     #         # max_guests = 10  # Change this to your desired maximum number of guests
 #     #         # number_of_guests = models.PositiveIntegerField(validators=[MaxValueValidator(max_guests)], default='1')
 #     #         # special_request = models.TextField(blank=True, null=True)
-#         reservation_date = models.DateField()
+        reservation_date = models.DateField()
 
-#         def __str__(self):
-#             return f"{self.customer_name} - {self.reservation_date}"
+        def __str__(self):
+            return f"{self.customer_name} - {self.reservation_date}"
