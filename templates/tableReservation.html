@@ -1,0 +1,20 @@
+{% extends 'main.html'%}
+{% load static %}
+{% block content%}
+
+
+    <h1>Custom Reservation Form</h1>
+        <form method="post" action="{% url 'reservation_form' %}">
+            {% csrf_token %}
+            <label for="customer_name">Customer Name:</label>
+            <input type="text" name="customer_name" required>
+
+            <label for="reservation_date">Reservation Date:</label>
+            <input type="date" name="reservation_date" required>
+            
+            <button type="submit">Submit Reservation</button>
+        </form>
+
+
+
+{% endblock content %}

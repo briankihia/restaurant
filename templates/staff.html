@@ -1,0 +1,28 @@
+{% extends 'main.html'%}
+{% load static %}
+{% block content%}
+
+<!-- <div class="order-card">
+    <h3>STAFF ID: 123</h3>
+    <p>Name: John Doe</p>
+    <p>Age: Pizza, Salad</p>
+    <p>Rank: $25.99</p>
+    
+</div> -->
+
+{% for employee in employees %}
+    <div class="order-card">
+    
+        <h3>{{ employee.name }}</h3>
+        <p>{{ employee.email }}</p>
+        <p>{{ employee.phone_number }}</p>
+        <p>{{ employee.position }}</p>
+        <p>{{ employee.get_gender_display }}</p> {# Use get_gender_display for choices field #}
+        <p>{{ employee.hire_date }}</p>
+        
+    </div>
+{%endfor%}
+
+
+
+{% endblock content %}

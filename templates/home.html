@@ -1,219 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="styles.css"> -->
-    <title>Restaurant App</title>
-    <style>
-
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-        }
-        
-        header {
-            background-color: #f8f8f8;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo img {
-            max-width: 100px;
-        }
-        
-        nav {
-            display: flex;
-            align-items: center;
-        }
-        
-        nav ul  {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column; /* Change the flex-direction to column */
-        }
-        
-        nav ul li {
-            margin: 0 10px;
-        }
-        
-        .menu-section,
-        .advertisement-section,
-        .category-boxes {
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .location-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .advertisement-section {
-            background-color: #ffd700; /* Yellow */
-        }
-        
-        .category-boxes {
-            display: flex;
-            justify-content: space-around;
-        }
-        
-        .category-box {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            cursor: pointer;
-        }
-        
-        .category-box:hover {
-            background-color: #45a049;
-        }
-        
-        .container {
-            display: inline-block;
-            cursor: pointer;
-            position: fixed;
-            z-index: 2;
-            transition: left 0.3s ease; /* Apply the transition to the left property */
-        }
-        
-        .bar1,
-        .bar2,
-        .bar3 {
-            width: 35px;
-            height: 5px;
-            background-color: #333;
-            margin: 6px 0;
-            transition: 0.4s;
-        }
-        
-        .container.change .bar1 {
-            transform: translate(0, 11px) rotate(-45deg);
-        }
-        
-        .container.change .bar2 {
-            opacity: 0;
-        }
-        
-        .container.change .bar3 {
-            transform: translate(0, -11px) rotate(45deg);
-        }
-        
-        .sidenav {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background-color: #1a1a1a; /* Dark Blue */
-            padding-top: 60px;
-            transition: 0.3s;
-            z-index: 1;
-        }
-        
-        .sidenav.show {
-            left: 0;
-        }
-        
-        .sidenav.show .container {
-            left: 250px;
-        }
-        
+{% extends 'main.html'%}
+{% load static %}
+{% block content%}
 
 
 
+<section class="menu-section">
+    <h1>Menu</h1>
+    <button class="location-button">Find Location</button>
+</section>
 
+<section class="advertisement-section">
+    <!-- Add your advertisement content here -->
+    <p>This is your advertisement area.</p>
+</section>
 
-
-
-        
-    </style>
-</head>
-<body>
-    <header>
-        <div class="logo">
-            <img src="your-logo.png" alt="Restaurant Logo">
+<section class="category-boxes">
+    <div class="category-box" onclick="location.href='dessert-page.html';">
+        <h2>Dessert</h2>
+    </div>
+    <div class="category-box" onclick="location.href='main-page.html';">
+        <h2>Main Course</h2>
+    </div>
+    <a href="{% url 'appetizer' %}">
+        <div class="category-box">
+            <h2>Appetizer</h2>
         </div>
-        <!-- <nav>
-             <input type="checkbox" id="menuToggle">
-            <label for="menuToggle">&#9776; Menu</label> 
-            <ul> -->
-                <!-- Add your menu items here -->
-                <!-- <li><a href="#">Home</a></li>
-                <li><a href="#">Menu</a></li>
-                <li><a href="#">Location</a></li>
-            </ul>
-        </nav>   -->
-    </header>
+    </a>
+    
+</section>
 
-    <div class="container" onclick="myFunction(this)">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </div>
+<script>
+    function myFunction(x) {
+        var sidenav = document.querySelector('.sidenav');
+        x.classList.toggle("change");
+        sidenav.classList.toggle("show");
+      }
       
-      <div class="sidenav">
-        <!-- Your side navigation content here -->
-        <nav>
-        <ul>
-        <a href="#about">TABLE RESERVATION</a>
-        <a href="#services">MANAGEMENT</a>
-        <a href="#clients">FEEDBACK</a>
-        </ul>
-    </nav>
-        
-        <!-- <button class="dropdown-btn">Dropdown
-          <i class="fa fa-caret-down"></i>
-        </button> -->
-        <!-- <div class="dropdown-container">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
-        </div> -->
-        
-      </div>
-      
+</script>
 
-    <section class="menu-section">
-        <h1>Menu</h1>
-        <button class="location-button">Find Location</button>
-    </section>
 
-    <section class="advertisement-section">
-        <!-- Add your advertisement content here -->
-        <p>This is your advertisement area.</p>
-    </section>
-
-    <section class="category-boxes">
-        <div class="category-box" onclick="location.href='dessert-page.html';">
-            <h2>Dessert</h2>
-        </div>
-        <div class="category-box" onclick="location.href='main-page.html';">
-            <h2>Main Course</h2>
-        </div>
-        <a href="{% url 'appetizer' %}">
-            <div class="category-box">
-                <h2>Appetizer</h2>
-            </div>
-        </a>
-        
-    </section>
-
-    <script>
-        function myFunction(x) {
-            var sidenav = document.querySelector('.sidenav');
-            x.classList.toggle("change");
-            sidenav.classList.toggle("show");
-          }
-          
-    </script>
-</body>
-</html>
+{% endblock content %}

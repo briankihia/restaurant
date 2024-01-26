@@ -2,6 +2,30 @@
 {% load static %}
 {% block content%}
 
-<h1>management</h1>
+
+
+<div class="item">
+    <a href="{% url 'orders' %}"> 
+            <h2>ORDERS</h2>
+    </a>
+</div>
+
+<div class="item">
+    <a href="{% url 'bookings' %}"> 
+        <h2>TABLES</h2>
+    </a>
+</div>
+
+<div class="item">
+    <a href="{% url 'staff' %}"> 
+        <h2>STAFF</h2>
+    </a>
+</div>
+
+<div class="item">
+    <a href="{% url 'timetable' %}"> 
+        <h2>TIMETABLE</h2>
+    </a>
+</div>
 
 {% endblock content %}

@@ -1,0 +1,26 @@
+{% extends 'main.html'%}
+{% load static %}
+{% block content%}
+
+<!-- timetable.html -->
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Duty</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for duty in current_day_duties %}
+            
+                <tr>
+                    <td>{{ duty.employee.name }}</td>
+                    <td>{{ duty.duty }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock content %}

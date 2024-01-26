@@ -17,10 +17,12 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             return redirect('management')
+            # return JsonResponse({'success': True, 'redirect': '/management/'})
 
         else:
-            messages.info(request,'invalid credentials')
-            return redirect('login')
+            #  return JsonResponse({'success': False, 'message': 'Invalid credentials'})
+             messages.info(request,'invalid credentials')
+             return redirect('login')
 
     else:
         return render(request,'login.html')

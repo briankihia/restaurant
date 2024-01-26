@@ -127,14 +127,72 @@
         .sidenav.show .container {
             left: 250px;
         }
+
+        .item {
+            display: block;
+            max-width: 300px; /* Set your desired maximum width */
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px auto; /* Center the menu item horizontally */
+        }
+
+        .order-card {
+            display:block;
+            max-width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-card h3 {
+            color: #333;
+        }
+
+        .order-card p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        table {
+            display: block;
+            max-width: 300px;
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-size: 16px;
+        }
+    
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+    
+        th {
+            background-color: #f2f2f2;
+        }
+    
+        tr:hover {
+            background-color: #f5f5f5;
+        }
    
     </style>
+    <!-- Add these lines to your template -->
+
 </head>
 <body>
     <header>
         <div class="logo">
             <img src="your-logo.png" alt="Restaurant Logo">
         </div>
+        <!-- this is just to display the user's name if logged in -->
+
+        {% block user_info %}
+            {% if user.is_authenticated %}
+                <div>Welcome, {{ user.username }}!</div>
+            {% endif %}
+        {% endblock %}
         <!-- <nav>
              <input type="checkbox" id="menuToggle">
             <label for="menuToggle">&#9776; Menu</label> 
@@ -159,8 +217,21 @@
         <!-- Your side navigation content here -->
         <nav>
         <ul>
-        <a href="#about">TABLE RESERVATION</a>
-        <a href="#services">MANAGEMENT</a>
+        <a href="{% url 'reservation_form' %}">TABLE RESERVATION</a>
+
+        {% if user.is_authenticated %}
+            <button id="redirect-button">Management</button>
+            <script>
+                document.getElementById('redirect-button').addEventListener('click', function() {
+                    window.location.href = "{% url 'management' %}";
+                });
+            </script>
+        {% else %}
+            <a href="{% url 'login' %}">
+                <button>Login </button>
+            </a>
+        {% endif %}
+        <!-- <button id="management-button">Management</button> -->
         <a href="#clients">FEEDBACK</a>
         </ul>
     </nav>
@@ -199,6 +270,21 @@
             x.classList.toggle("change");
             sidenav.classList.toggle("show");
           }
+
+
+          document.getElementById('management-button').addEventListener('click', function() {
+            console.log("Button Clicked!");
+            fetch('/check-authentication/')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.authenticated) {
+                        window.location.href = '/management/';
+                    } else {
+                        // Display error message on the page
+                        document.getElementById('error-message').innerText = data.message;
+                    }
+                });
+        });
 
 
         
