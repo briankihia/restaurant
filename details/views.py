@@ -67,12 +67,12 @@ def reservation_form(request):
     if request.method == 'POST':
         customer_name = request.POST.get('customer_name')
 #     #     email = request.POST.get('email')
-#     #     phone_number = request.POST.get('phone_number')
-#     #     number_of_guests = request.POST.get('number_of_guests')
-#     #     special_request = request.POST.get('special_request')
+        phone_number = request.POST.get('phone_number')
+        number_of_guests = request.POST.get('number_of_guests')
+        special_request = request.POST.get('special_request')
         reservation_date = request.POST.get('reservation_date')
 #     # # now we save the data to the database
-        reservation = Reservation(customer_name=customer_name, reservation_date=reservation_date)
+        reservation = Reservation(customer_name=customer_name, reservation_date=reservation_date, phone_number=phone_number, number_of_guests=number_of_guests, special_request=special_request)
         reservation.save()
         
 #         return redirect('reservation_success')

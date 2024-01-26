@@ -8,3 +8,4 @@ admin.site.register(Category),
 admin.site.register(Item)
 admin.site.register(DailyDuty)
 admin.site.register(Employee)
+admin.site.register(Reservation)

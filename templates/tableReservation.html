@@ -9,8 +9,18 @@
             <label for="customer_name">Customer Name:</label>
             <input type="text" name="customer_name" required>
 
+            <label for="phone_number">Phone Number:</label>
+            <input type="text" name="phone_number" required>
+
+            <label for="number_of_guests">Number of Guests:</label>
+            <input type="number" name="number_of_guests" min="1" value="1" required>
+
             <label for="reservation_date">Reservation Date:</label>
             <input type="date" name="reservation_date" required>
+
+
+            <label for="special_request">Special Requests:</label>
+            <textarea name="special_request" rows="4" cols="50"></textarea>
             
             <button type="submit">Submit Reservation</button>
         </form>
