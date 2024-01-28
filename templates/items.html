@@ -1,0 +1,44 @@
+{% extends 'main.html'%}
+{% load static %}
+{% block content%}
+
+<section class="menu-section">
+    <h1>Menu</h1>
+    <button class="location-button">Find Location</button>
+</section>
+
+<section class="advertisement-section">
+    <!-- Add your advertisement content here -->
+    <p>This is your advertisement area.</p>
+</section>
+
+    <!-- <h2>Items</h2> -->
+
+    <!-- <ul>
+        {% for item in items %}
+            <li>{{ item.name }} - <a href="{% url 'show_items_by_category' item.category.id %}">{{ item.category }}</a></li>
+        {% endfor %}
+    </ul> -->
+
+    <!-- <h3>Categories</h3>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'show_items_by_category' category.id %}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul> -->
+
+    <section class="category-boxes">
+        
+            <ul>
+                {% for category in categories %}
+                <div class="category-box">
+                    <li><a href="{% url 'show_items_by_category' category.id %}">{{ category.name }}</a></li>
+                </div>
+                {% endfor %}
+                
+            </ul>
+        
+
+    </section>
+
+{% endblock content %}

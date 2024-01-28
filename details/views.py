@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # from .models import Category, Item
 from .models import *
 from datetime import date, timedelta  # Add this line to import the 'date' class
@@ -123,3 +123,33 @@ def feedback(request):
         # return redirect('success_page')  # Redirect to a success page
 
     return render(request, 'feedback.html', {'error': None})
+
+
+
+
+
+
+
+    # views.py
+
+
+def show_categories(request):
+    categories = Category.objects.all()
+    return render(request, 'items.html', {'categories': categories})
+    # return render(request, 'categories.html', {'categories': categories})
+
+def show_items(request, category_id=None):
+    categories = Category.objects.all()
+    selected_category = None
+    items = BaseItem.objects.all()
+
+    if category_id:
+        selected_category = Category.objects.get(pk=category_id)
+        items = BaseItem.objects.filter(category=selected_category)
+
+    return render(request, 'items.html', {'categories': categories, 'items': items, 'selected_category': selected_category})
+
+def show_items_by_category(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    items = BaseItem.objects.filter(category=category)
+    return render(request, 'items_by_category.html', {'category': category, 'items': items})
