@@ -15,6 +15,10 @@
  <label for="descSearch">Search by Description:</label>
  <input type="text" id="descSearch" placeholder="Search by description...">
 
+ <label for="additionalFilter">Additional Filter:</label>
+<input type="text" id="additionalFilter" name="additionalFilter" placeholder="filter out by description">
+
+
 
 <section class="advertisement-section">
     <!-- Add your advertisement content here -->
@@ -47,14 +51,18 @@
       var nameSearchInput = document.getElementById('nameSearch');
       var descSearchInput = document.getElementById('descSearch');
       var appetizerList = document.getElementById('appetizerList');
+      //I added another input field where the user can filter out object he /she does'nt like
+      var additionalFilterInput = document.getElementById('additionalFilter');
 
       // Add event listeners for input changes
       nameSearchInput.addEventListener('input', handleSearch);
       descSearchInput.addEventListener('input', handleSearch);
+      additionalFilterInput.addEventListener('input', handleSearch); 
 
       function handleSearch() {
           var nameFilter = nameSearchInput.value.toUpperCase();
           var descFilter = descSearchInput.value.toUpperCase();
+          var additionalFilter = additionalFilterInput.value.toUpperCase(); // Get the value of additional filter
 
           // Loop through the list items and hide/show based on the filters
           var appetizers = document.getElementsByClassName('appetizer');
@@ -62,12 +70,24 @@
               var item = appetizers[i];
               var itemName = item.getAttribute('data-name').toUpperCase();
               var itemDesc = item.getAttribute('data-description').toUpperCase();
+              //var additionalCriteria = item.getAttribute('data-additional').toUpperCase(); // Assuming you have an attribute to hold additional criteria
+              // var additionalCriteria = item.getAttribute('data-description').toUpperCase(); 
+             //var additionalCriteria = itemDesc;
+
+              // Splitting the item description into its components
+       // var descriptionComponents = itemDescription.split(":");
+        //var itemDesc = descriptionComponents.length > 1 ? descriptionComponents[1] : ""; // Extracting the actual description
+        //var additionalCriteria = descriptionComponents.length > 1 ? descriptionComponents[0] : ""; // Extracting the additional criteria
+
 
               var nameMatch = itemName.indexOf(nameFilter) > -1;
               var descMatch = itemDesc.indexOf(descFilter) > -1;
+              //var additionalMatch = additionalCriteria.indexOf(additionalFilter) === -1; // Check for additional criteria match
+              //var additionalMatch = additionalFilter === '' || additionalCriteria.indexOf(additionalFilter) === -1;
+              var additionalMatch = additionalFilter === '' || itemDesc.indexOf(additionalFilter) === -1;
 
               // Show the item only if both filters match or if there is no filter
-              if (nameMatch && descMatch) {
+              if (nameMatch && descMatch && additionalMatch){ //&& additionalMatch) {
                   item.style.display = '';
               } else {
                   item.style.display = 'none';

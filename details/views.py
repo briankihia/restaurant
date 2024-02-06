@@ -34,7 +34,9 @@ def orders(request):
     return render(request,'orders.html')
 
 def bookings(request):
-    return render(request,'bookings.html')
+    reservations = Reservation.objects.all()
+
+    return render(request,'bookings.html',{'reservations': reservations})
 
 def staff(request):
     employees = Employee.objects.all()
@@ -76,6 +78,8 @@ def timetable(request):
 
 
 def reservation_form(request):
+    reservations = None  # Initialize the variable outside of the conditional block
+    
     if request.method == 'POST':
         customer_name = request.POST.get('customer_name')
         email = request.POST.get('email')
@@ -84,8 +88,24 @@ def reservation_form(request):
         special_request = request.POST.get('special_request')
         reservation_date = request.POST.get('reservation_date')
 #     # # now we save the data to the database
-        reservation = Reservation(customer_name=customer_name, reservation_date=reservation_date, phone_number=phone_number, number_of_guests=number_of_guests, special_request=special_request, email=email)
-        reservation.save()
+        # reservation = Reservation(customer_name=customer_name, reservation_date=reservation_date, phone_number=phone_number, number_of_guests=number_of_guests, special_request=special_request, email=email)
+        # reservation.save()
+          # Create a new Reservation object
+        reservation = Reservation.objects.create(
+            customer_name=customer_name,
+            reservation_date=reservation_date,
+            phone_number=phone_number,
+            number_of_guests=number_of_guests,
+            special_request=special_request,
+            email=email
+        )
+
+        # Fetch all reservations from the database
+        # reservations = Reservation.objects.all()
+        
+
+        # Fetch all reservations from the database and at the end of this function pass it there
+    # reservations = reservation.objects.all()
         
 #         return redirect('reservation_success')
 #     #     # Perform any necessary validation or processing here
@@ -94,7 +114,10 @@ def reservation_form(request):
 #     #     # Redirect to a success page or render a thank you message
 #     #     # return redirect('custom_reservation_success')
     
-    return render(request, 'tableReservation.html')
+    return render(request, 'tableReservation.html', {'reservations': reservations})
+
+
+
 
 def reservation_success(request):
     return render(request,'reservation_success.html')
@@ -125,7 +148,11 @@ def feedback(request):
     return render(request, 'feedback.html', {'error': None})
 
 
+def viewFeedback(request):
 
+    feedbacks = Feedback.objects.all()
+    
+    return render(request,'viewFeedback.html',{'feedbacks':feedbacks})
 
 
 

@@ -16,6 +16,7 @@ urlpatterns= [
     path('feedback/', views.feedback, name='feedback'),
     path('main/', views.main, name='main'),
     path('dessert/', views.dessert, name='dessert'),
+    path('viewFeedback/', views.viewFeedback,name='viewFeedback'),
 
 
     # testing dynamic rendering of models

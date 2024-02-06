@@ -2,7 +2,7 @@
 {% load static %}
 {% block content%}
 
-<div class="order-card">
+<!-- <div class="order-card">
     <h3>Table number:</h3>
     <p>No. People:</p>
     <p>Date of Booking:</p>
@@ -18,7 +18,20 @@
     <p>Customer Name</p>
     <p>Special Requests</p>
     <p>Reservation Id:</p>
-</div>
+</div> -->
+
+{% for reservation in reservations %}
+
+    <div class="order-card">
+            <h3>{{ reservation.customer_name}}</h3>
+            <p>Reservation Date:{{reservation.reservation_date}}</p>
+            <p>No. People:{{reservation.number_of_guests}}</p>
+            <p>Phone Number:{{reservation.phone_number}}</p>
+            <p>Special Requests:{{reservation.special_request}}</p>
+            <p>Email:{{reservation.email}}</p>
+    
+    </div>
+{% endfor %}
 
 
 

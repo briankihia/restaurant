@@ -13,6 +13,7 @@ admin.site.register(Feedback)
 
 
 admin.site.register(Category)
+# baseItem is each item in a category
 admin.site.register(BaseItem)
 admin.site.register(Dessert)
 admin.site.register(MainDish)

@@ -1,0 +1,17 @@
+{% extends 'main.html'%}
+{% load static %}
+{% block content%}
+
+{% for feedback in feedbacks %}
+
+    <div class="order-card">
+           
+
+            <p>Comment:{{feedback.comments}}</p>
+            <p>Email:{{feedback.email}}</p>
+    
+    </div>
+{% endfor %}
+
+
+{% endblock content %}
